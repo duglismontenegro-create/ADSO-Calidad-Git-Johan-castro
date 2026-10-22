@@ -41,3 +41,5 @@ npm test
 ## Archivo .gitignore
 
 El archivo `.gitignore` excluye variables de entorno, logs, dependencias instaladas, archivos compilados y archivos temporales. No se deben subir contraseñas ni secretos reales.
+## Módulo de Reportes
+Permite generar reportes estadísticos a partir de una lista válida de usuarios.
