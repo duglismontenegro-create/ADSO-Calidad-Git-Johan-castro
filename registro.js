@@ -3,23 +3,26 @@
  */
 
 function registrarUsuario(nombre, correo) {
-  // Validar el nombre
   if (typeof nombre !== "string" || nombre.trim() === "") {
     throw new Error("El nombre es obligatorio");
   }
 
-  // Validar el correo electrónico
-  if (
-    typeof correo !== "string" ||
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.trim())
-  ) {
+  if (typeof correo !== "string") {
     throw new Error("El correo no es válido");
   }
 
-  // Retornar los datos del usuario
+  const correoLimpio = correo.trim();
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoLimpio)) {
+    throw new Error("El correo no es válido");
+  }
+
   return {
-    nombre: nombre.trim(),
-    correo: correo.trim().toLowerCase()
+    mensaje: "Usuario registrado correctamente",
+    usuario: {
+      nombre: nombre.trim(),
+      correo: correoLimpio.toLowerCase()
+    }
   };
 }
 
