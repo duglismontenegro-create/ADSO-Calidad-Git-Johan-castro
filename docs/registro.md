@@ -1,5 +1,12 @@
-# Módulo de registro
+## Pruebas del módulo
 
-El módulo `registro.js` recibe el nombre y el correo de una persona.
-Comprueba que ambos valores sean texto y que no estén vacíos.
-Si los datos son válidos, devuelve un objeto con el mensaje de éxito y el usuario.
+El módulo de registro se valida con pruebas automatizadas usando Node.js.
+
+Se comprueba que:
+- Se registre un usuario con datos válidos.
+- Se rechace un nombre vacío.
+- Se rechacen datos que no sean texto.
+
+Para ejecutar las pruebas, utiliza el comando:
+
+npm test

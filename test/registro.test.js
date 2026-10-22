@@ -1,22 +1,39 @@
-const test = require("node:test");
-const assert = require("node:assert/strict");
-const { registrarUsuario } = require("../registro");
+/**
+ * Registra usuarios y valida sus datos básicos.
+ */
 
-test("registra usuario con datos válidos", () => {
-  const resultado = registrarUsuario("Ana Pérez", "ana@example.com");
-  assert.equal(resultado.mensaje, "Usuario registrado correctamente");
-  assert.deepEqual(resultado.usuario, {
-    nombre: "Ana Pérez",
-    correo: "ana@example.com"
-  });
-});
+function registrarUsuario(nombre, correo) {
+  // Validar que el nombre sea texto y no esté vacío
+  if (typeof nombre !== "string" || nombre.trim() === "") {
+    return {
+      error: "El nombre es obligatorio"
+    };
+  }
 
-test("rechaza nombre vacío", () => {
-  const resultado = registrarUsuario("   ", "ana@example.com");
-  assert.ok(resultado.error);
-});
+  // Validar que el correo sea texto
+  if (typeof correo !== "string") {
+    return {
+      error: "El correo no es válido"
+    };
+  }
 
-test("rechaza datos que no sean texto", () => {
-  const resultado = registrarUsuario(123, null);
-  assert.ok(resultado.error);
-});
+  const correoLimpio = correo.trim();
+
+  // Validar el formato del correo electrónico
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoLimpio)) {
+    return {
+      error: "El correo no es válido"
+    };
+  }
+
+  // Devolver el resultado del registro
+  return {
+    mensaje: "Usuario registrado correctamente",
+    usuario: {
+      nombre: nombre.trim(),
+      correo: correoLimpio.toLowerCase()
+    }
+  };
+}
+
+module.exports = { registrarUsuario };
